@@ -3176,7 +3176,7 @@ PyObject *eEPGCache::lookupEvent(ePyObject list, ePyObject convertFunc)
 		ePyObject argv=PyList_GET_ITEM(list, 0); // borrowed reference!
 		if (PyString_Check(argv))
 		{
-			argstring = PyString_AS_STRING(argv);
+			argstring = PyBytes_AsString(argv);
 			++listIt;
 		}
 		else
@@ -3263,7 +3263,7 @@ PyObject *eEPGCache::lookupEvent(ePyObject list, ePyObject convertFunc)
 			if (minutes && stime == -1)
 				stime = ::time(0);
 
-			eServiceReference ref(handleGroup(eServiceReference(PyString_AS_STRING(service))));
+			eServiceReference ref(handleGroup(eServiceReference(PyBytes_AsString(service))));
 			// redirect subservice querys to parent service
 			eServiceReferenceDVB &dvb_ref = (eServiceReferenceDVB&)ref;
 			if (dvb_ref.getParentTransportStreamID().get()) // linkage subservice
@@ -3595,7 +3595,7 @@ static const char* getStringFromPython(ePyObject obj)
 	char *result = 0;
 	if (PyString_Check(obj))
 	{
-		result = PyString_AS_STRING(obj);
+		result = PyBytes_AsString(obj);
 	}
 	return result;
 }
@@ -3620,7 +3620,7 @@ void eEPGCache::importEvents(ePyObject serviceReferences, ePyObject list)
 	if (PyString_Check(serviceReferences))
 	{
 		char *refstr;
-		refstr = PyString_AS_STRING(serviceReferences);
+		refstr = PyBytes_AsString(serviceReferences);
 	        if (!refstr)
 	        {
 			eDebug("[eEPGCache:import] serviceReference string is 0, aborting");
@@ -3635,7 +3635,7 @@ void eEPGCache::importEvents(ePyObject serviceReferences, ePyObject list)
 		{
 			PyObject* item = PyList_GET_ITEM(serviceReferences, i);
 			char *refstr;
-	                refstr = PyString_AS_STRING(item);
+	                refstr = PyBytes_AsString(item);
 	                if (!refstr)
         	        {
 				eDebug("[eEPGCache:import] a serviceref item is not a string");
@@ -3748,7 +3748,7 @@ PyObject *eEPGCache::search(ePyObject arg)
 #else
 				argcount = PyString_Size(obj);
 #endif
-				argstring = PyString_AS_STRING(obj);
+				argstring = PyBytes_AsString(obj);
 				for (int i=0; i < argcount; ++i)
 					switch(argstring[i])
 					{
@@ -3790,7 +3790,7 @@ PyObject *eEPGCache::search(ePyObject arg)
 				ePyObject obj = PyTuple_GET_ITEM(arg, 3);
 				if (PyString_Check(obj))
 				{
-					refstr = PyString_AS_STRING(obj);
+					refstr = PyBytes_AsString(obj);
 					eServiceReferenceDVB ref(refstr);
 					if (ref.valid())
 					{
@@ -3843,7 +3843,7 @@ PyObject *eEPGCache::search(ePyObject arg)
 				if (PyString_Check(obj))
 				{
 					int casetype = PyLong_AsLong(PyTuple_GET_ITEM(arg, 4));
-					const char *str = PyString_AS_STRING(obj);
+					const char *str = PyBytes_AsString(obj);
 #if PY_VERSION_HEX < 0x02060000
 					int strlen = PyString_GET_SIZE(obj);
 #else
