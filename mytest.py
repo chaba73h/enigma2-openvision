@@ -14,6 +14,9 @@ enigma.eTimer = eBaseImpl.eTimer
 enigma.eSocketNotifier = eBaseImpl.eSocketNotifier
 enigma.eConsoleAppContainer = eConsoleImpl.eConsoleAppContainer
 
+from boxbranding import getVisionVersion, getVisionRevision, getHaveMultiLib
+print("[mytest] Open Vision version = %s" % getVisionVersion())
+print("[mytest] Open Vision revision = %s" % getVisionRevision())
 from Components.SystemInfo import SystemInfo
 if not SystemInfo["OpenVisionModule"]:
 	print("[mytest] Open Vision in multiboot! Now we have to remove what relies on our kernel module!")
