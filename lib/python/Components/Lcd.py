@@ -11,6 +11,7 @@ from sys import maxsize
 from twisted.internet import threads
 import Screens.Standby
 import usb
+from os import sys
 
 class dummyScreen(Screen):
 	skin = """<screen position="0,0" size="0,0" transparent="1">
