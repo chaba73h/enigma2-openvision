@@ -48,10 +48,10 @@ class inputDevices:
 				buffer = "\0"*512
 				self.fd = os.open("/dev/input/" + evdev, os.O_RDWR | os.O_NONBLOCK)
 				self.name = ioctl(self.fd, EVIOCGNAME(256), buffer)
-				self.name = self.name[:self.name.find("\0")]
+				self.name = self.name[:self.name.find(b"\0")]
 				os.close(self.fd)
 			except (IOError,OSError) as err:
-				print('[InputDevice] getInputDevices ' + evdev + ' <ERROR: ioctl(EVIOCGNAME): ' + str(err) + ' >')
+				print("[InputDevice] getInputDevices ' + evdev + ' <ERROR: ioctl(EVIOCGNAME): ' + str(err) + ' >")
 				self.name = None
 
 			if self.name:
@@ -61,11 +61,11 @@ class inputDevices:
 
 
 	def getInputDeviceType(self,name):
-		if "remote control" in str(name).lower():
+		if b"remote control" in str(name).lower().name:
 			return "remote"
-		elif "keyboard" in str(name).lower():
+		elif b"keyboard" in str(name).lower().name:
 			return "keyboard"
-		elif "mouse" in str(name).lower():
+		elif b"mouse" in str(name).lower().name:
 			return "mouse"
 		else:
 			print("[InputDevice] Unknown device type:",name)
