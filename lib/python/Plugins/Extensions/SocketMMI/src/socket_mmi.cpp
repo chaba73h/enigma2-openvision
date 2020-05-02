@@ -485,6 +485,6 @@ static struct PyModuleDef socketmmi_moduledef = {
 
 PyMODINIT_FUNC PyInit_socketmmi(void)
 {
-	PyModule_Create(&socketmmi_moduledef);
+	return PyModule_Create(&socketmmi_moduledef);
 }
 };
