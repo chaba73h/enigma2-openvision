@@ -53,11 +53,14 @@ class GUISkin:
 				# w.instance.thisown = 0
 			applyAllAttributes(w.instance, desktop, w.skinAttributes, self.scale)
 
-		for f in self.onLayoutFinish:
-			if type(f) is not type(self.close): # is this the best way to do this?
-				exec(f, globals(), locals())
-			else:
-				f()
+		for f in self.onLayoutFinish: # FIXME
+			try:
+				if type(f) is not type(self.close): # is this the best way to do this?
+					exec(f, globals(), locals())
+				else:
+					f()
+			except:
+				pass
 
 	def deleteGUIScreen(self):
 		for (name, val) in self.items():
