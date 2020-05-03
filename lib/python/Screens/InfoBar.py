@@ -221,7 +221,7 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarAspectRatio,
 	def __init__(self, session, service, slist=None, lastservice=None, infobar=None):
 		Screen.__init__(self, session)
 
-		self["actions"] = HelpableActionMap(self, "MoviePlayerActions",
+		self["actions"] = HelpableActionMap(self, ["MoviePlayerActions"],
 			{
 				"leavePlayer": (self.leavePlayer, _("leave movie player...")),
 				"leavePlayerOnExit": (self.leavePlayerOnExit, _("leave movie player...")),
