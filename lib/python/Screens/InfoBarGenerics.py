@@ -972,7 +972,7 @@ class InfoBarChannelSelection:
 
 class InfoBarAspectRatio:
 	def __init__(self):
-		self["AspectRatioActions"] = HelpableActionMap(self, "InfobarAspectRatio",
+		self["AspectRatioActions"] = HelpableActionMap(self, ["InfobarAspectRatio"],
 			{
 				"toggleAspectRatio": (self.toggleAspectRatio, _("Toggle aspect ratio...")),
 			})
